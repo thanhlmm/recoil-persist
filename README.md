@@ -19,7 +19,7 @@ import App from './App'
 import { atom, RecoilRoot, useRecoilState } from 'recoil'
 import { recoilPersist } from 'recoil-persist'
 
-const { persistAtom } = recoilPersist()
+const { persistAtom } = recoilPersist()()
 
 const counterState = atom({
   key: 'count',
@@ -69,7 +69,7 @@ import App from './App';
 import { RecoilRoot } from "recoil";
 +import { recoilPersist } from 'recoil-persist'
 
-+const { persistAtom } = recoilPersist()
++const { persistAtom } = recoilPersist()()
 
 const counterState = atom({
   key: 'count',
@@ -108,6 +108,9 @@ import { recoilPersist } from 'recoil-persist'
 const { persistAtom } = recoilPersist({
   key: 'recoil-persist', // this key is using to store data in local storage
   storage: localStorage, // configurate which stroage will be used to store the data
+})({
+  serialize: (input) => JSON.stringify(input), // Custom serialize function
+  deserialize: (input) => JSON.parse(input) // Custom deserialize function
 })
 ```
 
