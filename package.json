@@ -1,11 +1,11 @@
 {
-  "name": "recoil-persist",
-  "version": "2.5.0",
+  "name": "recoil-custom-persist",
+  "version": "2.6.0",
   "description": "Package for recoil to persist and rehydrate store",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "polemius/recoil-persist",
-  "author": "Ivan Menshykov <ivan.menshykov@gmail.com>",
+  "author": "Thanh Le <mihthanh27@gmail.com>",
   "license": "MIT",
   "keywords": [
     "state",
