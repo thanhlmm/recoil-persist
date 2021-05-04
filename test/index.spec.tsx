@@ -62,7 +62,7 @@ testPersistWith(syncStorage())
 function testPersistWith(storage: TestableStorage) {
   describe(`Storage: ${storage.name}`, () => {
     const testKey = 'test-key'
-    const { persistAtom } = recoilPersist({ key: testKey, storage })
+    const { persistAtom } = recoilPersist({ key: testKey, storage })()
 
     const getStateValue = () => {
       return JSON.parse(storage.getState()[testKey])

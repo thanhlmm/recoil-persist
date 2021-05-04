@@ -7,8 +7,21 @@ export interface PersistStorage {
 }
 
 export interface PersistConfiguration {
-  key?: string
-  storage?: PersistStorage
+  key?: string | (() => string)
+  storage?: PersistStorage,
+}
+
+export interface PersistSetting {
+  serialize?: (key) => string,
+  deserialize?: (string) => any,
+}
+
+const getKey = ({ key }: PersistConfiguration): string => {
+  if (typeof key === 'function') {
+    return key()
+  }
+
+  return key;
 }
 
 /**
@@ -20,14 +33,17 @@ export interface PersistConfiguration {
  */
 export const recoilPersist = (
   config: PersistConfiguration = {},
-): { persistAtom: AtomEffect<any> } => {
+): (settings?: PersistSetting) => { persistAtom: AtomEffect<any> } => (settings) => {
   if (typeof window === 'undefined') {
     return {
-      persistAtom: () => {},
+      persistAtom: () => { },
     }
   }
 
-  const { key = 'recoil-persist', storage = localStorage } = config
+
+  const { storage = localStorage } = config;
+  const { serialize, deserialize } = settings || {};
+  const key = getKey(config);
 
   const persistAtom: AtomEffect<any> = ({ onSet, node, trigger, setSelf }) => {
     if (trigger === 'get') {
@@ -35,12 +51,12 @@ export const recoilPersist = (
       if (typeof state.then === 'function') {
         state.then((s) => {
           if (s.hasOwnProperty(node.key)) {
-            setSelf(s[node.key])
+            setSelf(deserialize ? deserialize(s[node.key]): s[node.key])
           }
         })
       }
       if (state.hasOwnProperty(node.key)) {
-        setSelf(state[node.key])
+        setSelf(deserialize ? deserialize(state[node.key]): state[node.key])
       }
     }
 
@@ -54,7 +70,7 @@ export const recoilPersist = (
       ) {
         delete state[node.key]
       } else {
-        state[node.key] = newValue
+        state[node.key] = serialize ? serialize(newValue) : newValue
       }
 
       setState(state)
@@ -100,3 +116,4 @@ export const recoilPersist = (
 
   return { persistAtom }
 }
+
