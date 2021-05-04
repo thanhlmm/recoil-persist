@@ -1,4 +1,4 @@
-# Recoil Persist
+# Recoil Custom Persist
 
 Tiny module for [recoil](https://recoiljs.org) to store and sync state to
 `Storage`. It is only 354 bytes (minified and gzipped). No dependencies.
@@ -17,7 +17,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { atom, RecoilRoot, useRecoilState } from 'recoil'
-import { recoilPersist } from 'recoil-persist'
+import { recoilPersist } from 'recoil-custom-persist'
 
 const { persistAtom } = recoilPersist()()
 
@@ -51,13 +51,13 @@ ReactDOM.render(
 ## Install
 
 ```
-npm install recoil-persist
+npm install recoil-custom-persist
 ```
 
 or
 
 ```
-yarn add recoil-persist
+yarn add recoil-custom-persist
 ```
 
 Now you could add persisting a state to your app:
@@ -196,7 +196,7 @@ ReactDOM.render(
 ## Demo
 
 ```
-$ git clone git@github.com:polemius/recoil-persist.git
+$ git clone git@github.com:thanhlmm/recoil-persist.git
 $ cd recoil-persist
 $ npm install
 $ npm run start

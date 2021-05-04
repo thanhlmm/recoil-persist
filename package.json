@@ -1,10 +1,10 @@
 {
   "name": "recoil-custom-persist",
   "version": "2.6.1",
-  "description": "Package for recoil to persist and rehydrate store",
+  "description": "Package for recoil to persist and rehydrate store with custom serialize/deserialize function",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "polemius/recoil-persist",
+  "repository": "thanhlmm/recoil-persist",
   "author": "Thanh Le <mihthanh27@gmail.com>",
   "license": "MIT",
   "keywords": [
